@@ -18,15 +18,7 @@ class ClientController extends Controller
         return view('clients.index', compact('clientDatas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +28,37 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+              'name'=> 'required|max:255|string',
+              'username'=> 'required|max:255|string|unique:clients',
+            ]);
+
+        try {
+            $clients = new Client;
+            $clients->name = $request->input('name');
+            $clients->username = $request->input('username');
+            $clients->email = $request->input('email');
+            $clients->phone = $request->input('phone');
+            $clients->country = $request->input('country');
+            $clients->status = $request->input('status');
+            if($request->hasFile('picture')){
+                $file = $request->file('picture');
+                $extension = $file->getClientOriginalExtension();
+                $fileName = time().'.'.$extension;
+                $file->move('uploads/clients/', $fileName);
+                $clients->picture = $fileName;
+            }
+            $clients->save();
+
+            return response()->json([
+               'status' => 201,
+               'message' => 'Client Added successfully'
+            ]);
+
+        }catch(\Exception $e){
+            return  $e;
+        }
     }
 
     /**
