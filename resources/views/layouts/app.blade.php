@@ -32,9 +32,9 @@
         <script>
             $(document).ready( function () {
                 $('.dataTable').DataTable({
-                    pageLength : 5,
+                    pageLength: 5,
                     lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
-                    responsive: true
+                    responsive: true,
                 });
             } );
         </script>

@@ -29,7 +29,7 @@
                         <tbody>
                         @foreach($clientDatas as $client)
                             <tr>
-                                <td class="text-center  w-28"><img src="{{$client->picture}}" class="rounded " style="border-radius: 50%" alt="Client"></td>
+                                <td class="text-center  w-28"><img src="{{$client->picture}}"  style="border-radius: 50%;width: 70px;height: 70px;" alt="Client"></td>
                                 <td class="border  text-center w-28">{{$client->name}}</td>
                                 <td class="border  text-center w-28">{{$client->username}}</td>
                                 <td class="border  text-center w-28">{{$client->phone}}</td>
@@ -43,7 +43,7 @@
                                 </td>
                                 <td class="border  text-center w-28">
                                     <a href="{{ route('clients.edit', $client->id) }}" class="py-2  px-2 bg-indigo-50 text-green-600" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a href="" class="  py-2  px-2 bg-indigo-50 text-red-600" title="Delete"><i class="fas fa-trash"></i></a>
+                                    <a href="{{ route('clients.destroy', $client->id) }}" class="  py-2  px-2 bg-indigo-50 text-red-600" title="Delete"><i class="fas fa-trash"></i></a>
 
                                 </td>
                             </tr>
@@ -111,6 +111,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" style="color: #1a202c"  class="btn btn-secondary close-add-modal" data-bs-dismiss="modal">Close</button>
+                    <button type="reset" style="color: #1a202c"  class="btn btn-secondary reset-modal" >Reset</button>
                 </div>
             </div>
         </div>
@@ -137,16 +138,12 @@
                  processData:false,
                  success: function (response){
 
-
-
                      $('#success').html(response.message)
                      $('#success-show').show();
                      $('#success-show').removeClass('d-none');
-                     $('tbody').empty();
+
                      fetchClient();
                      clearField();
-
-
                  },
                  error: function (errors){
 
@@ -178,7 +175,10 @@
                   dataType:'json',
                   success: function (response){
                       // console.log(response.clients)
+                      $('tbody').html('');
                       $.each(response.clients, function (key, val) {
+
+
                           $('tbody').append
                           (
 
@@ -190,8 +190,8 @@
                                   <td class="border text-center w-28">'+val.country+'</td>\
                                   <td class="border text-center w-28"></td>\
                                   <td class="border  text-center w-28">\
-                                      <a href="" class="py-2  px-2 bg-indigo-50 text-green-600" title="Edit"><i class="fas fa-edit"></i></a>\
-                                      <a href="" class="  py-2  px-2 bg-indigo-50 text-red-600" title="Delete"><i class="fas fa-trash"></i></a>\
+                                      <a href='+val.id+' class="py-2  px-2 bg-indigo-50 text-green-600" title="Edit"><i class="fas fa-edit"></i></a>\
+                                      <a href='+val.id+' class="  py-2  px-2 bg-indigo-50 text-red-600" title="Delete"><i class="fas fa-trash"></i></a>\
                                   </td>\
                              </tr>'
 
@@ -200,6 +200,12 @@
                   },
               });
            }
+
+
+           //reset data
+           $(document).on('click', '.reset-modal', function (){
+               clearField();
+           })
 
        })
     </script>
