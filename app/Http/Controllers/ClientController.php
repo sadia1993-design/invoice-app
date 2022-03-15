@@ -18,6 +18,15 @@ class ClientController extends Controller
         return view('clients.index', compact('clientDatas'));
     }
 
+    public function fetch()
+    {
+        $clientDatas = Client::all();
+        return  response()->json([
+           'clients'=> $clientDatas,
+            'message'=>'client fetch successfully',
+        ]);
+    }
+
 
 
     /**
@@ -28,6 +37,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+
 
         $request->validate([
               'name'=> 'required|max:255|string',
