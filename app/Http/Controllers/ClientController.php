@@ -24,7 +24,7 @@ class ClientController extends Controller
     {
         return ClientResource::collection(
             Client::orderBy('created_at', "DESC")
-                ->get()
+                ->paginate(request('limit') ?? 10)
         );
     }
     //call

@@ -13,8 +13,9 @@ Route::get('/', function () {
 Route::prefix('dashboard')->middleware(['auth'])->group( function (){
 
     Route::get('/', function () { return view('dashboard'); })->name('dashboard');
-    Route::resource('clients', \App\Http\Controllers\ClientController::class);
-    Route::get('/client/lists', [\App\Http\Controllers\ClientController::class, 'lists'])->name('lists');
+    Route::resource('clients', \App\Http\Controllers\ClientController::class)
+        ->except(["show"]);
+    Route::get('clients/lists', [\App\Http\Controllers\ClientController::class, 'lists'])->name('lists');
 
 });
 require __DIR__.'/auth.php';

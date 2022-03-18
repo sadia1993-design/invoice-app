@@ -13,7 +13,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <table class="border-b border-gray-200 shadow dataTable" >
+                    <table class="border-b w-full border-gray-200 shadow dataTable" >
                         <thead class="bg-gray-50">
                         <tr>
                             <th class="border text-center py-2">Image</th>
@@ -90,12 +90,13 @@
         //fetch client
         function fetchClient()
         {
+            var limit = 5;
             $.ajax({
-                url: "{{ route('lists') }}",
+                url: "{{ url('dashboard/clients/lists') }}" + '?limit=' + limit,
                 type: 'get',
                 dataType:'json',
                 success: function (response) {
-
+                    console.log(response)
                     $('tbody').empty();
                     $.each(response.data, function (key, val) {
                         $('tbody').append(
@@ -113,7 +114,7 @@
                              </tr>'
                         );
                       });
-                    initDatatable();
+
 
                 },
                 error: function(error) {
