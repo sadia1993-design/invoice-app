@@ -28,7 +28,14 @@
         <!-- datatable responsive js-->
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
         <script>
-
+            function initDatatable()
+            {
+                $('.dataTable').DataTable({
+                    pageLength: 5,
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
+                    responsive: true,
+                });
+            }
         </script>
     </head>
     <body class="font-sans antialiased">

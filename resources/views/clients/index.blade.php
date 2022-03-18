@@ -62,6 +62,7 @@
                         $('#success').html(response.message)
                         $('#success-show').show();
                         $('#success-show').removeClass('d-none');
+                        fetchClient();
                         clearField();
                     },
                     error: function (errors){
@@ -84,7 +85,6 @@
             $('#country').val('');
             $('#picture').val('');
             $('#picture').val('');
-            $(".modal").hide();
         }
 
         //fetch client
@@ -95,12 +95,12 @@
                 type: 'get',
                 dataType:'json',
                 success: function (response) {
-                    // console.log(response)
+
                     $('tbody').empty();
                     $.each(response.data, function (key, val) {
                         $('tbody').append(
                             '<tr>\
-                                  <td class="text-center  w-28"><img src='+ val.picture +' class="rounded " style="border-radius: 50%" alt="Client"></td>\
+                                  <td class="text-center  w-28"><img src='+ val.picture +' class="rounded " style="width: 80px; height: 80px; margin:0 auto" alt="Client"></td>\
                                   <td class="border  text-center w-28">'+val.name+'</td>\
                                   <td class="border  text-center w-28">'+val.username+'</td>\
                                   <td class="border  text-center w-28">'+val.phone+'</td>\
@@ -112,22 +112,17 @@
                                   </td>\
                              </tr>'
                         );
-                    });
+                      });
                     initDatatable();
+
                 },
                 error: function(error) {
                 },
             });
         }
 
-        function initDatatable()
-        {
-            $('.dataTable').DataTable({
-                pageLength: 5,
-                lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
-                responsive: true,
-            });
-        }
+
+
     </script>
 
 </x-app-layout>
