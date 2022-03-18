@@ -19,8 +19,6 @@
         <!-- datatable responsive css-->
         <link type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet">
 
-
-
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -30,13 +28,7 @@
         <!-- datatable responsive js-->
         <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
         <script>
-            $(document).ready( function () {
-                $('.dataTable').DataTable({
-                    pageLength: 5,
-                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
-                    responsive: true,
-                });
-            } );
+
         </script>
     </head>
     <body class="font-sans antialiased">
