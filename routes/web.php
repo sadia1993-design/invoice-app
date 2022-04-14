@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+
 //frontEnd
 Route::get('/', function () {
     return view('welcome');
